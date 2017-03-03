@@ -54,48 +54,48 @@ sub main {
 #
 # Command parameters are query parameters named p0, p1, p2, p3 and p4
 # 	For example:
-#		http://host/status.m3u?p0=playlist&p1=jump&p2=2 
+# 		http://host/status.m3u?p0=playlist&p1=jump&p2=2 
 # This example jumps to the second song in the playlist and sends a playlist as the response
 #
 # If there are multiple players, then they are specified by the player id
 #   For example:
-#		http://host/status.html?p0=mixer&p1=volume&p2=11&player=10.0.1.203:69
+# 		http://host/status.html?p0=mixer&p1=volume&p2=11&player=10.0.1.203:69
 #
 sub executeCommand {
-    my ($httpaddr, $httpport, $player, $command, $p1, $p2, $p3, $p4) = @_;
-    my $urlstring = undef;
+	my ($httpaddr, $httpport, $player, $command, $p1, $p2, $p3, $p4) = @_;
+	my $urlstring = undef;
 	my $content = undef;
 	
 	$urlstring = "http://$httpaddr:$httpport/status.html?p0=$command";
 
-    if ( defined($p1) ) {
-        $p1 =~s/([^a-zA-Z0-9_\-.])/uc sprintf("%%%02x",ord($1))/eg;
-        $urlstring .= "&p1=" . $p1;
-    }
+	if ( defined($p1) ) {
+		$p1 =~s/([^a-zA-Z0-9_\-.])/uc sprintf("%%%02x",ord($1))/eg;
+		$urlstring .= "&p1=" . $p1;
+	}
 
-    if ( defined($p2) ) {
-        $p2 =~s/([^a-zA-Z0-9_\-.])/uc sprintf("%%%02x",ord($1))/eg;
-        $urlstring .= "&p2=" . $p2;
-    }
+	if ( defined($p2) ) {
+		$p2 =~s/([^a-zA-Z0-9_\-.])/uc sprintf("%%%02x",ord($1))/eg;
+		$urlstring .= "&p2=" . $p2;
+	}
 
-    if ( defined($p3) ) {
-        $p3 =~s/([^a-zA-Z0-9_\-.])/uc sprintf("%%%02x",ord($1))/eg;
-        $urlstring .= "&p3=" . $p3;
-    }
+	if ( defined($p3) ) {
+		$p3 =~s/([^a-zA-Z0-9_\-.])/uc sprintf("%%%02x",ord($1))/eg;
+		$urlstring .= "&p3=" . $p3;
+	}
 
-    if ( defined($p4) ) {
-        $p4 =~s/([^a-zA-Z0-9_\-.])/uc sprintf("%%%02x",ord($1))/eg;
-        $urlstring .= "&p4=" . $p4;
-    }
+	if ( defined($p4) ) {
+		$p4 =~s/([^a-zA-Z0-9_\-.])/uc sprintf("%%%02x",ord($1))/eg;
+		$urlstring .= "&p4=" . $p4;
+	}
 
-    if ( defined($player) ) {
-        $player =~s/([^a-zA-Z0-9_\-.])/uc sprintf("%%%02x",ord($1))/eg;
-        $urlstring .= "&player=" . $player;
-    }
+	if ( defined($player) ) {
+		$player =~s/([^a-zA-Z0-9_\-.])/uc sprintf("%%%02x",ord($1))/eg;
+		$urlstring .= "&player=" . $player;
+	}
 
 	$urlstring .= "\n";
 	unless (defined ($content = get($urlstring))) {
-    		die "could not get $urlstring\n";
+		die "could not get $urlstring\n";
 	}
 
 	print $urlstring, "\n";
@@ -109,14 +109,14 @@ sub showUsage {
 Usage: $0 --httpaddr <host|ip> --httpport <port> --command <command> 
           [--p1 <arg>] [--p2 <arg>] [--p3 <arg>] [--p4 <arg>] [--player <playerid>]
 
-        --httpaddr  => The hostname or ip address of the Slim web server
+	--httpaddr  => The hostname or ip address of the Slim web server
 	--httpport  => The port on which the Slim web server is listening
 	--command   => Pick from the 1st column of the list below
-        --p1        => Pick from the 2st column of the list below
-        --p2        => Pick from the 3rd column of the list below
-        --p3        => Pick from the 4th column of the list below
-        --p4        => Pick from the 5th column of the list below
-        --player    => Currently the "ip:port" of your player
+	--p1        => Pick from the 2st column of the list below
+	--p2        => Pick from the 3rd column of the list below
+	--p3        => Pick from the 4th column of the list below
+	--p4        => Pick from the 5th column of the list below
+	--player    => Currently the "ip:port" of your player
 
 	COMMAND		P1	P2		P3	P4
 	 play
