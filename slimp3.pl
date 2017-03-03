@@ -116,7 +116,7 @@ Usage: $0 --httpaddr <host|ip> --httpport <port> --command <command>
 	--p2        => Pick from the 3rd column of the list below
 	--p3        => Pick from the 4th column of the list below
 	--p4        => Pick from the 5th column of the list below
-	--player    => Currently the "ip:port" of your player
+	--player    => The name, "ip:port" or mac address of your player
 
 	COMMAND		P1	P2		P3	P4
 	 play
